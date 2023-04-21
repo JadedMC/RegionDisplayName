@@ -78,7 +78,7 @@ public class RegionDisplayNameCMD implements CommandExecutor, TabCompleter {
             // Reloads all plugin configuration files.
             case "reload":
                 plugin.getSettingsManager().reload();
-                ChatUtils.chat(sender, "&a&lRegionDisplayName &8» &aConfiguration files reloaded successfully!");
+                ChatUtils.chat(sender, "&a&lRegionDisplayName &8» &aConfiguration file reloaded successfully!");
                 return true;
 
             // Displays the plugin version.
@@ -91,7 +91,7 @@ public class RegionDisplayNameCMD implements CommandExecutor, TabCompleter {
                 ChatUtils.chat(sender, "&a&lRegionDisplayName Commands");
                 ChatUtils.chat(sender, "&a/rdn set [region] [display name] &8» &fSet a region's display name.");
                 ChatUtils.chat(sender, "&a/rdn reload &8» &fReloads the configuration file.");
-                ChatUtils.chat(sender, "&a/rdn version< &8» &fDisplays the plugin version.");
+                ChatUtils.chat(sender, "&a/rdn version &8» &fDisplays the plugin version.");
                 return true;
         }
     }
