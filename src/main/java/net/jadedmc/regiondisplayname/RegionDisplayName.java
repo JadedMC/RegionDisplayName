@@ -31,6 +31,9 @@ public final class RegionDisplayName extends JavaPlugin {
             Bukkit.getLogger().severe("RegionDisplayName requires PlaceholderAPI to be installed.");
             getServer().getPluginManager().disablePlugin(this);
         }
+
+        // Enables bStats statistics tracking.
+        new Metrics(this, 18257);
     }
 
     /**
