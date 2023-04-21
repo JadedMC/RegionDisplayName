@@ -1,4 +1,10 @@
+# Uses legacy color codes with the & symbol.
+# RGB can be used with & then the hex code, such as &#FFFF00.
+
+# Displays when the region does not have a set display name.
 Default: "&7None"
 
+# Sets the region's display name.
+# Format: region_id: "display name"
 Regions:
   __global__: "&7None"
