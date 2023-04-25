@@ -6,6 +6,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
+import me.clip.placeholderapi.PlaceholderAPI;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import net.jadedmc.regiondisplayname.utils.ChatUtils;
 import org.bukkit.entity.Player;
@@ -112,7 +113,7 @@ class Placeholders extends PlaceholderExpansion {
                 displayName = plugin.getSettingsManager().getConfig().getString("Default");
             }
 
-            return ChatUtils.translate(displayName);
+            return ChatUtils.translate(PlaceholderAPI.setPlaceholders(player, displayName));
         }
 
         return null;
