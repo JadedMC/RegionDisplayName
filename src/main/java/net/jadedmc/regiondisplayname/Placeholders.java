@@ -102,10 +102,14 @@ class Placeholders extends PlaceholderExpansion {
             ApplicableRegionSet regions = container.get(localPlayer.getWorld()).getApplicableRegions(localPlayer.getLocation().toVector().toBlockPoint());
 
             String displayName = "";
+            int lastPriority = 0;
 
             for(ProtectedRegion region : regions) {
                 if(plugin.getSettingsManager().getConfig().isSet("Regions." + region.getId())) {
-                    displayName = plugin.getSettingsManager().getConfig().getString("Regions." + region.getId());
+                    if(region.getPriority() >= lastPriority) {
+                        lastPriority = region.getPriority();
+                        displayName = plugin.getSettingsManager().getConfig().getString("Regions." + region.getId());
+                    }
                 }
             }
 
