@@ -113,6 +113,13 @@ class Placeholders extends PlaceholderExpansion {
                 }
             }
 
+            // If no regions are found, check for world names.
+            if(regions.size() == 0) {
+                if(plugin.getSettingsManager().getConfig().isSet("Regions." + player.getWorld().getName())) {
+                    displayName = plugin.getSettingsManager().getConfig().getString("Regions." + player.getWorld().getName());
+                }
+            }
+
             if(displayName.isEmpty()) {
                 displayName = plugin.getSettingsManager().getConfig().getString("Default");
             }
