@@ -60,7 +60,10 @@ public final class RegionDisplayNamePlugin extends JavaPlugin {
         getCommand("regiondisplayname").setExecutor(new RegionDisplayNameCMD(this));
 
         // Register WorldGuard sessions
-        WorldGuard.getInstance().getPlatform().getSessionManager().registerHandler(WorldGuardListener.factory, null);
+
+        if (getMessageManager().isMessageModeEnabled()){
+            WorldGuard.getInstance().getPlatform().getSessionManager().registerHandler(WorldGuardListener.factory, null);
+        }
 
         // If PlaceholderAPI is installed, enables placeholders
         if(getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
