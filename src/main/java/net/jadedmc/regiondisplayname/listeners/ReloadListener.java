@@ -25,6 +25,11 @@
 package net.jadedmc.regiondisplayname.listeners;
 
 import better.reload.api.ReloadEvent;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.bukkit.listener.WorldGuardBlockListener;
+import com.sk89q.worldguard.bukkit.listener.WorldGuardEntityListener;
+import com.sk89q.worldguard.bukkit.listener.WorldGuardPlayerListener;
+import com.sk89q.worldguard.bukkit.listener.WorldGuardWeatherListener;
 import net.jadedmc.regiondisplayname.RegionDisplayNamePlugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -53,4 +58,5 @@ public class ReloadListener implements Listener {
     public void onReload(@NotNull final ReloadEvent event) {
         plugin.reload();
     }
+
 }
