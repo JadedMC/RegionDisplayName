@@ -1,3 +1,27 @@
+/*
+ * This file is part of RegionDisplayName, licensed under the MIT License.
+ *
+ *  Copyright (c) JadedMC
+ *  Copyright (c) contributors
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
 package net.jadedmc.regiondisplayname;
 
 import com.sk89q.worldguard.LocalPlayer;
@@ -105,23 +129,23 @@ class Placeholders extends PlaceholderExpansion {
             int lastPriority = 0;
 
             for(final ProtectedRegion region : regions) {
-                if(plugin.getSettingsManager().getConfig().isSet("Regions." + region.getId())) {
+                if(plugin.getConfigManager().getConfig().isSet("Regions." + region.getId())) {
                     if(region.getPriority() >= lastPriority) {
                         lastPriority = region.getPriority();
-                        displayName = plugin.getSettingsManager().getConfig().getString("Regions." + region.getId());
+                        displayName = plugin.getConfigManager().getConfig().getString("Regions." + region.getId());
                     }
                 }
             }
 
             // If no regions are found, check for world names.
             if(regions.size() == 0) {
-                if(plugin.getSettingsManager().getConfig().isSet("Regions." + player.getWorld().getName())) {
-                    displayName = plugin.getSettingsManager().getConfig().getString("Regions." + player.getWorld().getName());
+                if(plugin.getConfigManager().getConfig().isSet("Regions." + player.getWorld().getName())) {
+                    displayName = plugin.getConfigManager().getConfig().getString("Regions." + player.getWorld().getName());
                 }
             }
 
             if(displayName.isEmpty()) {
-                displayName = plugin.getSettingsManager().getConfig().getString("Default");
+                displayName = plugin.getConfigManager().getConfig().getString("Default");
             }
 
             return ChatUtils.translate(PlaceholderAPI.setPlaceholders(player, displayName));

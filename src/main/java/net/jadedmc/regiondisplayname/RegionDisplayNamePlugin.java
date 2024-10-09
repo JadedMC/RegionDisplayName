@@ -34,7 +34,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public final class RegionDisplayNamePlugin extends JavaPlugin {
     private HookManager hookManager;
-    private SettingsManager settingsManager;
+    private ConfigManager configManager;
 
     /**
      * Runs when the server is started.
@@ -42,7 +42,7 @@ public final class RegionDisplayNamePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        settingsManager = new SettingsManager(this);
+        configManager = new ConfigManager(this);
         hookManager = new HookManager(this);
 
         // Register commands
@@ -67,16 +67,16 @@ public final class RegionDisplayNamePlugin extends JavaPlugin {
 
     /**
      * Gets the current settings manager instance.
-     * @return Settings Manager.
+     * @return Config Manager.
      */
-    public SettingsManager getSettingsManager() {
-        return settingsManager;
+    public ConfigManager getConfigManager() {
+        return configManager;
     }
 
     /**
      * Reloads the plugin configuration and updates important values.
      */
     public void reload() {
-        this.settingsManager.reloadConfig();
+        this.configManager.reloadConfig();
     }
 }

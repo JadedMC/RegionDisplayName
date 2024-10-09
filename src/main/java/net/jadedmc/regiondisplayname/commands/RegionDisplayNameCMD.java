@@ -92,9 +92,9 @@ public class RegionDisplayNameCMD implements CommandExecutor, TabCompleter {
                 final String regionID = args[1];
                 final String displayName = StringUtils.join(Arrays.copyOfRange(args, 2, args.length), " ");
 
-                plugin.getSettingsManager().getConfig().set("Regions." + regionID, displayName);
-                plugin.getSettingsManager().saveConfig();
-                plugin.getSettingsManager().reloadConfig();
+                plugin.getConfigManager().getConfig().set("Regions." + regionID, displayName);
+                plugin.getConfigManager().saveConfig();
+                plugin.getConfigManager().reloadConfig();
 
                 ChatUtils.chat(sender, "&a&lRegionDisplayName &8» &aRegion &f" + regionID + " &adisplay name set to &f" + displayName + "&a.");
                 return true;
