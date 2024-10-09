@@ -25,7 +25,7 @@
 package net.jadedmc.regiondisplayname.listeners;
 
 import better.reload.api.ReloadEvent;
-import net.jadedmc.regiondisplayname.RegionDisplayName;
+import net.jadedmc.regiondisplayname.RegionDisplayNamePlugin;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
@@ -35,13 +35,13 @@ import org.jetbrains.annotations.NotNull;
  * <a href="https://github.com/amnoah/BetterReload">BetterReload GitHub</a>
  */
 public class ReloadListener implements Listener {
-    private final RegionDisplayName plugin;
+    private final RegionDisplayNamePlugin plugin;
 
     /**
      * Creates the listener.
      * @param plugin Instance of the plugin.
      */
-    public ReloadListener(@NotNull final RegionDisplayName plugin) {
+    public ReloadListener(@NotNull final RegionDisplayNamePlugin plugin) {
         this.plugin = plugin;
     }
 

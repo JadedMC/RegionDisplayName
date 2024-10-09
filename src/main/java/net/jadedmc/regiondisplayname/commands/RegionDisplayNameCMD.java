@@ -30,7 +30,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
-import net.jadedmc.regiondisplayname.RegionDisplayName;
+import net.jadedmc.regiondisplayname.RegionDisplayNamePlugin;
 import net.jadedmc.regiondisplayname.utils.ChatUtils;
 import net.jadedmc.regiondisplayname.utils.StringUtils;
 import org.bukkit.command.Command;
@@ -51,13 +51,13 @@ import java.util.List;
  * - /rdn
  */
 public class RegionDisplayNameCMD implements CommandExecutor, TabCompleter {
-    private final RegionDisplayName plugin;
+    private final RegionDisplayNamePlugin plugin;
 
     /**
      * To be able to access the configuration files, we need to pass an instance of the plugin to our listener.
      * @param plugin Instance of the plugin.
      */
-    public RegionDisplayNameCMD(@NotNull final RegionDisplayName plugin) {
+    public RegionDisplayNameCMD(@NotNull final RegionDisplayNamePlugin plugin) {
         this.plugin = plugin;
     }
 

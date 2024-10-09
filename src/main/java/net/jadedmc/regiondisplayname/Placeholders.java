@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
  * plugins onEnable-method.
  */
 class Placeholders extends PlaceholderExpansion {
-    private final RegionDisplayName plugin;
+    private final RegionDisplayNamePlugin plugin;
 
     /**
      * Since we register the expansion inside our own plugin, we
@@ -26,7 +26,7 @@ class Placeholders extends PlaceholderExpansion {
      * @param plugin
      *        The instance of our plugin.
      */
-    public Placeholders(RegionDisplayName plugin){
+    public Placeholders(RegionDisplayNamePlugin plugin){
         this.plugin = plugin;
     }
 
@@ -96,15 +96,15 @@ class Placeholders extends PlaceholderExpansion {
     public String onPlaceholderRequest(Player player, String identifier) {
 
         if(identifier.equalsIgnoreCase("name")) {
-            LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
-            RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            final LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+            final RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
 
-            ApplicableRegionSet regions = container.get(localPlayer.getWorld()).getApplicableRegions(localPlayer.getLocation().toVector().toBlockPoint());
+            final ApplicableRegionSet regions = container.get(localPlayer.getWorld()).getApplicableRegions(localPlayer.getLocation().toVector().toBlockPoint());
 
             String displayName = "";
             int lastPriority = 0;
 
-            for(ProtectedRegion region : regions) {
+            for(final ProtectedRegion region : regions) {
                 if(plugin.getSettingsManager().getConfig().isSet("Regions." + region.getId())) {
                     if(region.getPriority() >= lastPriority) {
                         lastPriority = region.getPriority();

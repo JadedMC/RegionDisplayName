@@ -1,6 +1,6 @@
 name: RegionDisplayName
 version: '${project.version}'
-main: net.jadedmc.regiondisplayname.RegionDisplayName
+main: net.jadedmc.regiondisplayname.RegionDisplayNamePlugin
 api-version: 1.13
 depend:
   - WorldGuard
