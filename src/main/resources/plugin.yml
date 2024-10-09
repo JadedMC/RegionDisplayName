@@ -6,6 +6,9 @@ depend:
   - WorldGuard
   - PlaceholderAPI
 
+softdepend:
+  - BetterReload
+
 commands:
   regiondisplayname:
     description: RegionDisplayName main plugin command.
