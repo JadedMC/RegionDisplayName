@@ -26,6 +26,7 @@ package net.jadedmc.regiondisplayname;
 
 import net.jadedmc.regiondisplayname.commands.RegionDisplayNameCMD;
 import net.jadedmc.regiondisplayname.listeners.ReloadListener;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
