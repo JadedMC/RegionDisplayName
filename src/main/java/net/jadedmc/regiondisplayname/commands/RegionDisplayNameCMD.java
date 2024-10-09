@@ -1,3 +1,27 @@
+/*
+ * This file is part of RegionDisplayName, licensed under the MIT License.
+ *
+ *  Copyright (c) JadedMC
+ *  Copyright (c) contributors
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights
+ *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *  copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in all
+ *  copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *  SOFTWARE.
+ */
 package net.jadedmc.regiondisplayname.commands;
 
 import com.sk89q.worldguard.LocalPlayer;
@@ -33,7 +57,7 @@ public class RegionDisplayNameCMD implements CommandExecutor, TabCompleter {
      * To be able to access the configuration files, we need to pass an instance of the plugin to our listener.
      * @param plugin Instance of the plugin.
      */
-    public RegionDisplayNameCMD(RegionDisplayName plugin) {
+    public RegionDisplayNameCMD(@NotNull final RegionDisplayName plugin) {
         this.plugin = plugin;
     }
 
@@ -54,7 +78,7 @@ public class RegionDisplayNameCMD implements CommandExecutor, TabCompleter {
         }
 
         // Get the sub command used.
-        String subCommand = args[0].toLowerCase();
+        final String subCommand = args[0].toLowerCase();
 
         switch (subCommand) {
             // Adds a command to the command list.
@@ -65,19 +89,19 @@ public class RegionDisplayNameCMD implements CommandExecutor, TabCompleter {
                     return true;
                 }
 
-                String regionID = args[1];
-                String displayName = StringUtils.join(Arrays.copyOfRange(args, 2, args.length), " ");
+                final String regionID = args[1];
+                final String displayName = StringUtils.join(Arrays.copyOfRange(args, 2, args.length), " ");
 
                 plugin.getSettingsManager().getConfig().set("Regions." + regionID, displayName);
-                plugin.getSettingsManager().save();
-                plugin.getSettingsManager().reload();
+                plugin.getSettingsManager().saveConfig();
+                plugin.getSettingsManager().reloadConfig();
 
                 ChatUtils.chat(sender, "&a&lRegionDisplayName &8» &aRegion &f" + regionID + " &adisplay name set to &f" + displayName + "&a.");
                 return true;
 
             // Reloads all plugin configuration files.
             case "reload":
-                plugin.getSettingsManager().reload();
+                plugin.reload();
                 ChatUtils.chat(sender, "&a&lRegionDisplayName &8» &aConfiguration file reloaded successfully!");
                 return true;
 
@@ -112,7 +136,7 @@ public class RegionDisplayNameCMD implements CommandExecutor, TabCompleter {
             return Collections.emptyList();
         }
 
-        Player player = (Player) sender;
+        final Player player = (Player) sender;
 
         // Suggest sub commands if one hasn't been selected yet.
         if(args.length < 2) {
@@ -122,23 +146,23 @@ public class RegionDisplayNameCMD implements CommandExecutor, TabCompleter {
         // Processes sub command tab complete.
         if(args.length == 2) {
             // Get the sub command being used.
-            String subCommand = args[0].toLowerCase();
+            final String subCommand = args[0].toLowerCase();
 
             // Processes tab complete for the set command.
             if(subCommand.equals("set")) {
-                LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
-                RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-                RegionManager regions = container.get(localPlayer.getWorld());
+                final LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+                final RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+                final RegionManager regions = container.get(localPlayer.getWorld());
 
                 // Return an empty collection if there are no regions.
                 if(regions == null) {
                     return Collections.emptyList();
                 }
 
-                List<String> regionIds = new ArrayList<>();
+                final List<String> regionIds = new ArrayList<>();
 
                 // Region the region ids of all regions in the world.
-                for(ProtectedRegion region : regions.getRegions().values()) {
+                for(final ProtectedRegion region : regions.getRegions().values()) {
                     regionIds.add(region.getId());
                 }
 

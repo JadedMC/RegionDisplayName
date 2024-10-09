@@ -26,7 +26,6 @@ package net.jadedmc.regiondisplayname;
 
 import net.jadedmc.regiondisplayname.commands.RegionDisplayNameCMD;
 import net.jadedmc.regiondisplayname.listeners.ReloadListener;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -50,12 +49,12 @@ public final class RegionDisplayName extends JavaPlugin {
         getCommand("regiondisplayname").setExecutor(new RegionDisplayNameCMD(this));
 
         // If PlaceholderAPI is installed, enables placeholders
-        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+        if(getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new Placeholders(this).register();
         }
         else {
             // If not, logs a warning and disables the plugin
-            Bukkit.getLogger().severe("RegionDisplayName requires PlaceholderAPI to be installed.");
+            getLogger().severe("RegionDisplayName requires PlaceholderAPI to be installed.");
             getServer().getPluginManager().disablePlugin(this);
         }
 
@@ -72,5 +71,12 @@ public final class RegionDisplayName extends JavaPlugin {
      */
     public SettingsManager getSettingsManager() {
         return settingsManager;
+    }
+
+    /**
+     * Reloads the plugin configuration and updates important values.
+     */
+    public void reload() {
+        this.settingsManager.reloadConfig();
     }
 }
