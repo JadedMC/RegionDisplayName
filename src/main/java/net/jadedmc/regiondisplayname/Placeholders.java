@@ -118,7 +118,6 @@ class Placeholders extends PlaceholderExpansion {
 
     @Override
     public String onPlaceholderRequest(Player player, String identifier) {
-
         if(identifier.equalsIgnoreCase("name")) {
             final LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
             final RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();

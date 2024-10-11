@@ -24,8 +24,10 @@
  */
 package net.jadedmc.regiondisplayname;
 
+import com.sk89q.worldguard.WorldGuard;
 import net.jadedmc.regiondisplayname.commands.RegionDisplayNameCMD;
 import net.jadedmc.regiondisplayname.listeners.ReloadListener;
+import net.jadedmc.regiondisplayname.listeners.WorldGuardListener;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -36,18 +38,32 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class RegionDisplayNamePlugin extends JavaPlugin {
     private HookManager hookManager;
     private ConfigManager configManager;
+    private RegionMessageManager messageManager;
+
+
+    // Added instance for PluginMessage system
+    private static RegionDisplayNamePlugin instance;
 
     /**
      * Runs when the server is started.
      */
     @Override
     public void onEnable() {
+        // instance is registered
+        instance = this;
         // Plugin startup logic
         configManager = new ConfigManager(this);
         hookManager = new HookManager(this);
+        messageManager = new RegionMessageManager(this);
 
         // Register commands
         getCommand("regiondisplayname").setExecutor(new RegionDisplayNameCMD(this));
+
+        // Register WorldGuard sessions
+
+        if (getMessageManager().isMessageModeEnabled()){
+            WorldGuard.getInstance().getPlatform().getSessionManager().registerHandler(WorldGuardListener.factory, null);
+        }
 
         // If PlaceholderAPI is installed, enables placeholders
         if(getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
@@ -75,9 +91,23 @@ public final class RegionDisplayNamePlugin extends JavaPlugin {
     }
 
     /**
+     * Gets the current message manager instance.
+     * @return Message Manager.
+     *
+     */
+    public RegionMessageManager getMessageManager() {
+        return messageManager;
+    }
+
+    /**
      * Reloads the plugin configuration and updates important values.
      */
     public void reload() {
         this.configManager.reloadConfig();
+    }
+
+    // Get the instance of the plugin
+    public static RegionDisplayNamePlugin getInstance() {
+        return instance;
     }
 }

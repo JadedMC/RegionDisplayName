@@ -1,6 +1,23 @@
 # Uses legacy color codes with the & symbol.
 # RGB can be used with & then the hex code, such as &#FFFF00.
 
+# Allows players to send a message type when they enter zones
+# It's a toggle feature and you can block some areas if you want.
+settings:
+  message:
+    # if you want to send a message, this options will true
+    enabled: true
+    # Type of message to send to the player.
+    # Supports 'actionbar' and 'title'!
+    type: actionbar
+    # if you have marked the type as 'actionbar' only the title is taken into account.
+    title: "&aYou entered %display%!"
+    # If you have marked the type as 'title' the sub-title is taken into account.
+    sub-title: "&bExample"
+    # If you want to remove some areas from this effect, you can write here as ID.
+    black-list:
+      - "example_region"
+
 # Displays when the region does not have a set display name.
 Default: "&7None"
 
